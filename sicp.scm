@@ -1,5 +1,7 @@
 ;;#lang sicp
 ;;(load "test.scm")
+(display "load success")
+(newline)
 (define (timed-prime-test n)
   (newline)
   (display n)

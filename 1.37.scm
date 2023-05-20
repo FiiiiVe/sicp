@@ -3,19 +3,19 @@
 (define fib 0.6180339887)
 ;; 迭代
 (define (cont-frac fN fD k)
-  (define (func N D k val)
+  (define (func N D index val)
     ;; 差值，判断是否逼近φ
     (display (abs (- val fib)))
     (newline)
-    (if (= k 0)
+    (if (= k index)
         val
-        (let ((next (/ (N k) (+ (D k) val))))
+        (let ((next (/ (N index) (+ (D index) val))))
           (if (close-enough? fib next)
               next
-              (func N D (- k 1) next)))))
+              (func N D (+ index 1) next)))))
   (define (close-enough? a b)
     (< (abs (- a b)) 0.0001))
-  (func fN fD k 0))
+  (func fN fD 1 0))
 (cont-frac (lambda (i) 1.0) (lambda (i) 1.0) 20)
 ;; k>10时，误差小于0.0001，4位精度？
 ;; 4位精度意味着数值的精确度被限制在小数点后四位
