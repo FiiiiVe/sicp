@@ -84,9 +84,24 @@
 (define (newtons-method g guess)
   (fixed-point (newton-transform g) guess))
 ;;
+(define (compose f g)
+  (lambda (x) (f (g x))))
+
 (define (repeated f n)
   (define (inner final_f ind)
     (if (< ind n)
         (compose f (inner final_f (+ ind 1)))
         final_f))
   (inner (lambda (x) x) 0))
+
+;; 有理数数据结构p58
+(define (make-rat n d)
+  (let ((g (gcd n d)))
+    (cons (/ n g) (/ d g))))
+(define (numer x) (car x))
+(define (denom x) (cdr x))
+(define (print-rat x)
+  (newline)
+  (display (numer x))
+  (display "/")
+  (display (denom x)))
