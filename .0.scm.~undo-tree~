@@ -1,0 +1,10 @@
+(undo-tree-save-format-version . 1)
+"dce19fd34421ad08f51d07366c0f97eba087ab46"
+[nil nil nil nil (25709 42021 355446 0) 0 nil]
+([nil nil ((#("F" 0 1 (fontified t face font-lock-string-face)) . 19) (undo-tree-id14 . 1) (undo-tree-id15 . -1) (t 25709 40257 0 0)) nil (25709 42021 355445 0) 0 nil])
+([nil nil ((#(":\\\\" 0 3 (fontified t face font-lock-string-face)) . 19) (undo-tree-id9 . -2) (undo-tree-id10 . 3) (undo-tree-id11 . 2) (undo-tree-id12 . 2) (undo-tree-id13 . -3)) nil (25709 42021 355441 0) 0 nil])
+([nil nil ((#("workspace" 0 9 (fontified t face font-lock-string-face)) . 19) (undo-tree-id6 . -8) (undo-tree-id7 . 9) (undo-tree-id8 . -9)) nil (25709 42021 355434 0) 0 nil])
+([nil nil ((#("\\\\" 0 2 (fontified t face font-lock-string-face)) . 19) (undo-tree-id3 . -1) (undo-tree-id4 . 2) (undo-tree-id5 . -2)) nil (25709 42021 355431 0) 0 nil])
+([nil nil ((#("sicp" 0 4 (fontified t face font-lock-string-face)) . 19) (undo-tree-id0 . -3) (undo-tree-id1 . 4) (undo-tree-id2 . -4)) nil (25709 42021 355425 0) 0 nil])
+([nil current ((19 . 20)) nil (25709 42021 355401 0) 0 nil])
+nil

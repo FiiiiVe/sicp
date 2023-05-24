@@ -1,3 +1,3 @@
 #lang sicp
-(load "F:\\workspace\\sicp\\sicp.scm")
+(load ".\\sicp.scm")
 
