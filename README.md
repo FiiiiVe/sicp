@@ -35,6 +35,7 @@
       geiser-racket
       racket-mode
       ```
+* 在dotspacemacs-configuration-layers列表中添加auto-completion图层
 # 运行
 * 打开0.scm，c-x c-w另存为xxx.scm
 * c-c c-a打开repl
