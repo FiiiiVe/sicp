@@ -36,5 +36,9 @@
       racket-mode
       ```
 # 运行
+* 打开0.scm，c-x c-w另存为xxx.scm
 * c-c c-a打开repl
 * c-c c-b运行，repl中运行load会有加载问题,可能要kill repl
+# 存在问题
+* 如1.2想加载1.1目前没什么好办法
+* 
