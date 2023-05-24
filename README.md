@@ -24,13 +24,17 @@
               ("org-cn"   . "http://elpa.emacs-china.org/org/")
               ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
     ```
-* ``M-x package-install``安装``geiser-racket``和``racket-mode``，配置racket路径（其实也可以通过环境变量）
+* ``dotspacemacs/user-config``中添加
     
     ```
-      (require 'racket-mode)
-        (setq racket-racket-program "C:/Program Files/Racket/racket.exe")
-        (setq racket-raco-program "C:/Program Files/Racket/raco.exe")
+      (setq geiser-racket-binary "C:/Program Files/Racket/Racket.exe")
+      (setq geiser-active-implementations '(racket))
     ```
+  ``dotspacemacs-additional-packages``中添加
+      ```
+      geiser-racket
+      racket-mode
+      ```
 # 运行
 * c-c c-a打开repl
-* c-c c-b运行，repl中运行load会有加载问题
+* c-c c-b运行，repl中运行load会有加载问题,可能要kill repl
