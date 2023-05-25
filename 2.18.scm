@@ -1,11 +1,19 @@
 #lang sicp
 (load ".\\sicp.scm")
-(define (reverse list)
-  (if (null? list)
-      nil
-      (if (null? (cdr list))
-          list
-          (cons (reverse (cdr list)) (car list)))))
-
+(define (reverse2 list)
+  (define (iter items ans)
+    (if (null? items)
+        ans
+        (iter (cdr items)
+              (cons (car items) ans))))
+  (iter list nil))
 (reverse nil)
-(reverse (list 1 4 9 16 25))
+(reverse2 (list 1 4 9 16 25))
+
+
+(define (reverse3 items)
+  (if (null? items)
+      nil
+      (append (reverse3 (cdr items))
+              (list (car items)))))
+(reverse3 (list 1 2 3 4 5))

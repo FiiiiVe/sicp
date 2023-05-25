@@ -132,3 +132,16 @@
   (display (upper-bound r))
   (display "]")
   (newline))
+
+;; 表操作p67
+(define (list-ref items n)
+  (if (= n 0)
+      (car items)
+      (list-ref (cdr items) (- n 1))))
+
+;; 递归遍历树
+(define (count-leaes x)
+        (cond ((null? x) 0)
+              ((not (pair? x)) 1)
+              (else (+ (count-leaves (car x))
+                       (count-leaves (cdr x))))))
