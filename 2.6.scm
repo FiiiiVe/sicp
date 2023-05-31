@@ -22,7 +22,7 @@
                   (lambda (x) ((f k) ((g k) x)))))
 
 
-;; 如果是上面 (f k)拆成f k,代换一下(+ two two)看看
+;; 代换一下(+ two three)看看,顺便验证一下乘法
 ;; (define (+ f g) (lambda (k)
 ;;                   (lambda (x) (f k ((g k) x)))))
 (lambda (k)
