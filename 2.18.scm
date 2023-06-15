@@ -16,4 +16,4 @@
       nil
       (append (reverse3 (cdr items))
               (list (car items)))))
-(reverse3 (list 1 2 3 4 5))
+(reverse3 (list 1 2 3 (list 1 2) 5))
