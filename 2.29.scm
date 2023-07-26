@@ -29,7 +29,7 @@
   (define (iter items)
     (cond ((null? items) 0)
           ((pair? (left-branch items)) (let ((left-weight (iter (left-branch items)))
-                                             (right-weight (iter (right-branch items))))
+                                             (right-weight (iter (right-branch 
                                          ;; 
                                          (if (and (not (null? left-weight))
                                                   (not (null? right-weight))
