@@ -4,3 +4,6 @@
 (car ''abab)
 ;; = (car '(quote abab))
 ;; = quote
+
+
+(car (quote (list 'a)) )
