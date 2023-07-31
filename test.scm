@@ -5,3 +5,7 @@
                   1.0))
 (define a (make-rat 1 -3))
 (print-rat a)
+
+
+'(+ -)
+'(1 2 3)
