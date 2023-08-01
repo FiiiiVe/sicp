@@ -1,3 +1,41 @@
 #lang sicp
 (load ".\\sicp.scm")
 
+;; 这个不是通用谓语，这个是通用型操作，理解错题意了
+(define (equ? num1 num2)
+  (let ((type1 (type-tag num1))
+        (type2 (type-tag num2)))
+    (cond ((not (eq? type1 type2)) #f)
+          ((eq? 'scheme-number type1) (= num1 num2))
+          ((eq 'complex type1)
+           (and (= (real-part num1)
+                   (real-part num2))
+                (= (imag-part num1)
+                   (imag-part num2))))
+          ((eq 'rational type1)
+           (and (= (numer num1)
+                   (numer num2))
+                (= (denom num1)
+                   (denom num2))))
+          (else #f))))
+
+;; 真正的通用谓语！！
+(define (install-scheme-member-package)
+;; ...
+  (put 'equ '(scheme-number scheme-number) =)
+  'done)
+(define (install-ration-package)
+  ;; ...
+  (define (equ? a b)
+    (= (* (numer a) (denom b))
+       (* (numer b) (denom a))))
+  (put 'equ '(ration ration) equ?)
+  'done)
+(define (install-complex-package)
+  (define (equ? a b)
+    (and (= (real-part a) (real-part b))
+         (= (imag-part a) (imag-part b))))
+  (put 'equ '(complex complex) equ?)
+  'done)
+(define (equ? a b)
+  (apply-generic 'equ x y))
