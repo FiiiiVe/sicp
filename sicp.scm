@@ -341,13 +341,19 @@
                          (make-leaf-set (cdr pairs))))))
 
 ;; p157 随机数
+(define rand
+  (let ((x 10))
+    (lambda ()
+      (set! x (rand-update x))
+      x)))
+
 (define (random-in-range low high)
   (let ((range (- high low)))
     (+ low (random range))))
 
 (define (monte-carlo trials experiment)
   (define (iter trials-remaining trials-passed)
-    (cond ((= trials-remaining trials-passed)
+    (cond ((= trials-remaining 0)
            (/ trials-passed trials))
           ((experiment)
            (iter (- trials-remaining 1) (+ trials-passed 1)))
