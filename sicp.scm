@@ -360,3 +360,10 @@
           (else
            (iter (- trials-remaining 1) trials-passed))))
   (iter trials 0))
+
+
+;; p176
+(define (last-pair x)
+  (if (null? (cdr x))
+      x
+      (last-pair (cdr x))))
