@@ -12,8 +12,9 @@
     (cond ((null? x) #f)
           ((contains? (car x) viewed) #t)
           (else (begin
-                  (set! viewed (cons x viewed))
+                  (set-cdr! (last-pair viewed) x)
                   (inner (cdr x))))))
+  (set! viewed (list x))
   (inner x))
 
 
