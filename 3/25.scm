@@ -1,6 +1,8 @@
 #lang sicp
 (load ".\\sicp.scm")
 
+
+
 (define (make-table)
   (let ((local-table (list 'table)))
     (define (assoc key records)
@@ -17,9 +19,9 @@
                   (record-or-next-subtable
                    (assoc (car keys) (cdr current-table))))
               (if record-or-next-subtable
-                  (if (pair? (car record-or-next-subtable))
+                  (if (pair? record-or-next-subtable)
                              ;; lookup record
-                             (cdar record-or-next-subtable)
+                             (cdr record-or-next-subtable)
                              (iter (cdr keys) record-or-next-subtable))
                   (if (null? (cdr keys))
                       false
@@ -40,14 +42,15 @@
                  (cond ((not record-or-next-subtable)
                         (if (null? (cdr keys))
                             ;; insert record
-                            (set-cdr! current-subtable (cons key value))
+                            (set-cdr! current-subtable (cons (cons key value)
+                                                             (cdr current-subtable)))
                             ;; insert table
                             (set-cdr! current-subtable
                                       (cons (list key) (cdr current-subtable)))
                             ))
                        ;; next layer exist, update record or iter next table
                        (else
-                        (if (pair? (car record-or-next-subtable))
+                        (if (pair? record-or-next-subtable)
                             ;; update record
                             (set-cdr! record-or-next-subtable value)
                              ;; iter next table
@@ -59,6 +62,12 @@
             (else (error "unknown operation -- table" m))))
     dispatch))
 
+(define a (list 't))
+(set-cdr! a (list (cons 'a 'a-v)))
+(display a)(newline)
+(display (cadr a))
 (define t (make-table))
 ((t 'insert-proc) (list 'a) 'a-value)
+((t 'insert-proc) (list 'a) 'aa-value)
 ((t 'lookup-proc) (list 'a))
+
