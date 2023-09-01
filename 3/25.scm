@@ -23,7 +23,7 @@
                              (iter (cdr keys) record-or-next-subtable)))
                   (if (null? (cdr keys))
                       false
-                      (error "remain keys not found"))))
+                      (error "remain keys not found"))))))
       (iter key-list local-table))
     (define (insert! key-list value)
       (define (iter keys current-subtable)
@@ -59,5 +59,5 @@
             (else (error "unknown operation -- table" m))))
     dispatch))
 
-(define a (list (cons 1 2)))
-(cdar a)
+(define t (make-table))
+((t 'insert-proc) (list 'a) 'a-value)
