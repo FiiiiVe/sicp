@@ -2,12 +2,12 @@
 (load ".\\sicp.scm")
 
 (define (make-table)
-  (let ((local-table (list *table*)))
+  (let ((local-table (list 'table)))
     (define (assoc key records)
       (cond ((null? records) #f)
             ((equal? key (caar records)) (car records))
             (else (assoc key (cdr records)))))
-    (define (look-up key-list)
+    (define (lookup key-list)
       (define (iter keys current-table)
         (if (null? keys)
             ;; only first call happen
@@ -15,12 +15,12 @@
             (error "lookup null keys error")
             (let ((key (car keys))
                   (record-or-next-subtable
-                   (assoc key (cdr current-table))))
+                   (assoc (car keys) (cdr current-table))))
               (if record-or-next-subtable
-                  (if (pair? (car record-or-next-subtable)
+                  (if (pair? (car record-or-next-subtable))
                              ;; lookup record
                              (cdar record-or-next-subtable)
-                             (iter (cdr keys) record-or-next-subtable)))
+                             (iter (cdr keys) record-or-next-subtable))
                   (if (null? (cdr keys))
                       false
                       (error "remain keys not found"))))))
@@ -35,7 +35,7 @@
               (else
                (let ((key (car keys))
                      (record-or-next-subtable
-                      (assoc key (cdr current-subtable))))
+                      (assoc (car keys) (cdr current-subtable))))
                  ;; next layer not exist, insert record or table
                  (cond ((not record-or-next-subtable)
                         (if (null? (cdr keys))
@@ -61,3 +61,4 @@
 
 (define t (make-table))
 ((t 'insert-proc) (list 'a) 'a-value)
+((t 'lookup-proc) (list 'a))
