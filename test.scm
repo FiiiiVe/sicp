@@ -1,10 +1,5 @@
 #lang sicp
 (load ".\\sicp.scm")
-(define (sqrt x)
-  (newtons-method (lambda (y) (- (square y) x))
-                  1.0))
-(define a (make-rat 1 -3))
-(print-rat a)
 
 
 '(+ -)
@@ -19,3 +14,10 @@
           "xxxxxxxxxxxxxx"))))
 (withdraw 50)
 (withdraw 30)
+
+(define a (list nil 'a))
+(define b (list nil 'b))
+(set-cdr! (cdr b) a)
+(set-car! a b)
+(cadr b)
+(cddr b)

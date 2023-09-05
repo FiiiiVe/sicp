@@ -3,12 +3,15 @@
 
 
 
+
 (define (make-table)
   (let ((local-table (list 'table)))
     (define (assoc key records)
       (cond ((null? records) #f)
             ((equal? key (caar records)) (car records))
             (else (assoc key (cdr records)))))
+    (define (is-table? l)
+      (or (null? (cdr l)) (pair? (cdr l))))
     (define (lookup key-list)
       (define (iter keys current-table)
         (if (null? keys)
@@ -19,12 +22,14 @@
                   (record-or-next-subtable
                    (assoc (car keys) (cdr current-table))))
               (if record-or-next-subtable
-                  (if (pair? record-or-next-subtable)
-                             ;; lookup record
-                             (cdr record-or-next-subtable)
-                             (iter (cdr keys) record-or-next-subtable))
+                  (if (is-table? record-or-next-subtable)
+                      ;; lookup table--check
+                      (iter (cdr keys) record-or-next-subtable)
+                      ;; lookup record---check
+                      (cdr record-or-next-subtable)
+                      )
                   (if (null? (cdr keys))
-                      false
+                      (error "no value exist")
                       (error "remain keys not found"))))))
       (iter key-list local-table))
     (define (insert! key-list value)
@@ -41,20 +46,24 @@
                  ;; next layer not exist, insert record or table
                  (cond ((not record-or-next-subtable)
                         (if (null? (cdr keys))
-                            ;; insert record
+                            ;; insert record--check
                             (set-cdr! current-subtable (cons (cons key value)
                                                              (cdr current-subtable)))
-                            ;; insert table
-                            (set-cdr! current-subtable
-                                      (cons (list key) (cdr current-subtable)))
+                            ;; insert table--check
+                            (begin 
+                              (set-cdr! current-subtable
+                                        (cons (list key) (cdr current-subtable)))
+                              (iter (cdr keys) (cadr current-subtable)))
                             ))
                        ;; next layer exist, update record or iter next table
                        (else
-                        (if (pair? record-or-next-subtable)
-                            ;; update record
+                        (if (is-table? record-or-next-subtable)
+                            ;; iter next table--check
+                            (iter (cdr keys) record-or-next-subtable)
+                            ;; update record--check
+                            ;; todo check is record or table
                             (set-cdr! record-or-next-subtable value)
-                             ;; iter next table
-                            (iter (cdr keys) record-or-next-subtable))))))))
+                            )))))))
       (iter key-list local-table))
     (define (dispatch m)
       (cond ((eq? m 'lookup-proc) lookup)
@@ -62,12 +71,17 @@
             (else (error "unknown operation -- table" m))))
     dispatch))
 
-(define a (list 't))
-(set-cdr! a (list (cons 'a 'a-v)))
-(display a)(newline)
-(display (cadr a))
 (define t (make-table))
-((t 'insert-proc) (list 'a) 'a-value)
-((t 'insert-proc) (list 'a) 'aa-value)
-((t 'lookup-proc) (list 'a))
+;; test insert-lookup
 
+(set! t (make-table))
+((t 'insert-proc) (list 'a 'b 'c) 'c-value)
+((t 'insert-proc) (list 'a 'b 'd) 'd-value)
+(display ((t 'lookup-proc) (list 'a 'b 'c)))(newline)
+(display ((t 'lookup-proc) (list 'a 'b 'd)))(newline)
+((t 'insert-proc) (list 'a 'b 'd) 'd2-value)
+(display ((t 'lookup-proc) (list 'a 'b 'd)))(newline)
+
+;; remain problem
+((t 'insert-proc) (list 'a 'b 'd 'e) 'e-value)
+(display ((t 'lookup-proc) (list 'a 'b 'd 'e)))(newline)
