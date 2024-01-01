@@ -1,12 +1,4 @@
 #lang sicp
 (load ".\\sicp.scm")
 
-(define (or-gate a b output)
-  (let ((c1 (make-wire))
-        (c2 (make-wire))
-        (c3 (make-wire)))
-    (inverter a c1)
-    (inverter b c2)
-    (and-gate c1 c2 c3)
-    (inverter c3 output)
-    'ok))
+;; 加入的proc需要初始化，如加了inverter，如果不初始化，则输出可能不是输入的invert，初始值就错了，后面每次set-signal翻转输出就没有意义了
