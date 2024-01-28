@@ -1,5 +1,5 @@
 #lang sicp
-(load ".\\sicp.scm")
+(load "./sicp.scm")
 
 
 
